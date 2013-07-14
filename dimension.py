@@ -1,6 +1,5 @@
-#!/usr/bin/env python
-
 from itertools import imap
+
 
 def dimensionalIterator(dimensions, maxItems=-1):
     """
@@ -23,7 +22,7 @@ def dimensionalIterator(dimensions, maxItems=-1):
         raise StopIteration
     if any(imap(lambda x: x != '*' and x <= 0, dimensions)):
         raise ValueError
-    odometer = [0,] * nDimensions
+    odometer = [0, ] * nDimensions
     while maxItems != 0:
         yield tuple(odometer)
         maxItems -= 1
