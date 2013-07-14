@@ -16,7 +16,7 @@ class TestDimensionalIterator(TestCase):
         self.assertRaises(ValueError, dimensionalIterator((2, 0, 3)).next)
 
     def testNegativeDimension(self):
-        self.assertRaises(ValueError, dimensionalIterator((2, '*', -1, 3)).next)
+        self.assertRaises(ValueError, dimensionalIterator((2, -1, 3)).next)
 
     def testLimitedTo0Items(self):
         self.assertEqual(
