@@ -2,7 +2,7 @@
 
 from itertools import imap
 
-def dimensionalIterator(dimensions, maxItems=None):
+def dimensionalIterator(dimensions, maxItems=-1):
     """
     Given a list of n positive integers, return a generator that yields
     n-tuples of coordinates to 'fill' the dimensions. This is like an
@@ -16,8 +16,7 @@ def dimensionalIterator(dimensions, maxItems=None):
     never exhausted. For example, dimensionalIterator(('*', 2)) yields the
     infinite series (0, 0), (0, 1), (1, 0), (1, 1), (2, 0), (2, 1), ....
 
-    maxItems, if not None, can be used to limit the number of tuples that
-    are yielded.
+    maxItems can be used to limit the number of tuples yielded.
     """
     nDimensions = len(dimensions)
     if nDimensions == 0 or maxItems == 0:
@@ -25,12 +24,9 @@ def dimensionalIterator(dimensions, maxItems=None):
     if any(imap(lambda x: x != '*' and x <= 0, dimensions)):
         raise ValueError
     odometer = [0,] * nDimensions
-    yieldCount = 0
-    while True:
+    while maxItems != 0:
         yield tuple(odometer)
-        yieldCount += 1
-        if yieldCount == maxItems:
-            raise StopIteration
+        maxItems -= 1
         wheel = nDimensions - 1
         while (dimensions[wheel] != '*' and
                odometer[wheel] == dimensions[wheel] - 1 and
